@@ -1,0 +1,75 @@
+#include<String.h> //1. include the header file from the Arduino inbuilt library to store the string values
+float sys,dia,pulse;    //2
+const int tempSensor = A0;     //3
+int tempValue = 0;       //4
+char a[5],b[5],c[5];   //5
+String inputString = "";         //6. a string to hold incoming data
+boolean stringComplete = false;  //7. whether the string is complete
+void setup()     //8
+{     //9
+  Serial.begin (9600); //10. initialize the serial communication at 9600-8-N-1
+  inputString.reserve(200);//11. buffer size of string storage data to hold 
+  delay(10);//12. generate the delay of 10 milli seconds  in between the buffer storage 
+  Serial.println();          //13
+  Serial.print("Connecting to BP sensor");     //14
+  delay(1000);//15. generating delay of 1 seconds
+}   //16
+void loop()  //17. fetching the incoming data continuously 
+{   //18
+  serialEvent(); // 19. call the function
+  if (stringComplete)       //20
+  {      //21
+    a[0]=inputString[1];   //22
+    a[1]=inputString[2];   //23
+    a[2]=inputString[3];   //24
+    sys=atof(a);        //25
+    Serial.print("sys:");        //26
+    Serial.print(sys);         //27
+    b[0]=inputString[6];    //28
+    b[1]=inputString[7];   //29
+    b[2]=inputString[8];    //30
+    dia=atof(b);    //31
+    Serial.print("Dia:");         //32
+    Serial.print(dia);         //33
+    c[0]=inputString[11];       //34
+    c[1]=inputString[12];       //35
+    c[2]=inputString[13];       //36
+    pulse=atof(c);      //37
+    Serial.print("Pulse:");     //38
+    Serial.println(pulse);     //39
+    if(inputString[0]==0x0A)//40. indication of incoming string data is complete
+    {   //41
+      a[0]=inputString[1];    //42
+      a[1]=inputString[2];    //43
+      a[2]=inputString[3];    //44
+      sys=atof(a);        //45
+      Serial.print("sys:");      //46
+      Serial.print(sys);        //47
+      b[0]=inputString[6];      //48
+      b[1]=inputString[7];        //49
+      b[2]=inputString[8];        //50
+      dia=atof(b);        //51
+      Serial.print("Dia:");         //52
+      Serial.print(dia);        //53
+      c[0]=inputString[11];         //54
+      c[1]=inputString[12];        //55
+      c[2]=inputString[13];       //56
+      pulse=atof(c);          //57
+      Serial.print("Pulse:");          //58
+      Serial.println(pulse);       //60
+    }         //61
+  }       //62
+  delay(2000);         //63
+}          //64
+void serialEvent() //65. calling and checking the serial port availability
+{        //66
+  while (Serial.available())          //67
+  {           //68
+    char inChar = (char)Serial.read();//69. get the new byte:
+    inputString += inChar; //70. add it to the inputString:
+    if (inChar == '\n')       //71
+    {         //72
+      stringComplete = true;        //73
+    }         //74
+  }    //75
+}         //76

@@ -1,0 +1,19 @@
+Program sketch
+#include<LiquidCrystal.h> //1. add LCD library
+int POT_pin = A0;    //2. connect POT to A0 pin of Arduino mega
+int Sensor_value= 0;  //3. assume state
+LiquidCrystal lcd(36, 37, 38, 39, 40, 41); //4. pins of Arduino connect to RS, E,D4, D5, D6, D7 pins of LCD
+void setup()   //5
+{   //6
+  lcd.begin (20,4); //7. initialize LCD
+  lcd.setCursor (0,0); //8. set cursor on LCD
+  lcd.print (" LCD Display "); //9. print string on LCD
+}  //10
+void loop()   //11
+{   //12
+  Sensor_value = analogRead(POT_pin);//13. command to read analog pin
+  lcd.setCursor (0,1); //14. set cursor on LCD
+  lcd.print (" Analog Output"); //15. print string on LCD
+  lcd.setCursor (0,2); //16. set cursor on LCD
+  lcd.print (Sensor_value); //17. print value on LCD
+}  //18

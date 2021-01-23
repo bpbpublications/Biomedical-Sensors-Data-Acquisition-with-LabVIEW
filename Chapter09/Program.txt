@@ -1,0 +1,18 @@
+getAirFlow()  // Returns an analogic value to represent the air flow.
+airFlowWave() // Prints air flow wave form in the serial monitor.
+int air = eHealth.getAirFlow();   
+#include <eHealth.h> 
+// The setup routine runs once when you press reset:
+void setup() 
+{
+  Serial.begin(115200);  //setting the baud rate 115200 for serial data acquisition
+}
+
+// the loop routine runs over and over again forever:
+void loop()
+{
+  int air = eHealth.getAirFlow();   
+  //eHealth.airFlowWave(air);  
+  Serial.println(air);
+  delay (20);
+}

@@ -1,0 +1,16 @@
+getTemperature() // Returns the corporal temperature.
+#include <eHealth.h>
+// the setup routine runs once when you press reset:
+void setup() 
+{
+  Serial.begin(115200);  
+}
+// the loop routine runs over and over again forever:
+void loop() 
+{
+  float temperature = eHealth.getTemperature();
+ // Serial.print("Temperature (ºC): ");  
+  Serial.println(temperature, 2);  // print the data up to 2 decimal places
+  Serial.println(""); 
+  delay(1000);	// wait for a second 
+}

@@ -1,0 +1,27 @@
+#include <LiquidCrystal.h> //1. add LCD library 
+LiquidCrystal lcd(36, 37, 38, 39, 40, 41); //2. pins of Arduino connect to RS, E,D4, D5, D6, D7 pins of LCD
+void setup()  //3
+{   //4
+  lcd.begin(20,4); //5. initialize the LCD 
+  lcd.setCursor(0, 0); //6. set cursor on LCD
+  lcd.print("LCD Display"); //7. print string on LCD
+  lcd.setCursor(0, 1); //8. set cursor on LCD
+  lcd.print("SYSTEM"); //9. print string on LCD
+}   //10
+void loop()    //11
+{   //12
+  for(int i=0;i<15;i++)//13 right shift of character
+  {   //14
+    lcd.setCursor(i, 2); //15. set cursor on LCD
+    lcd.print("RIGHT"); //16. print string on LCD
+    delay(100); //17. wait for 100 mSec
+    lcd.clear();    //18
+  }  //19
+  for(int i=15;i>0;i--)//20. left shift of character
+  {   //21
+    lcd.setCursor(i, 3); //22. set cursor on LCD
+    lcd.print("LEFT"); //23. print string on LCD
+    delay(100); //24. wait for 100 mSec
+    lcd.clear();  //25. clear the contents of LCD
+  }  //26
+}  //27

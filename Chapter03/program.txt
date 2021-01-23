@@ -1,0 +1,22 @@
+const int BUTTON_pin_input = 22;    // 1. connect push button to 22 pin of Arduino 
+const int indicator_LED_pin =23;    //2. connect LED to 23 pin of Arduino mega
+int BUTTON_pin_input_STATE  = 0;  //3. assume state
+void setup()    //4
+{   //5
+  pinMode(indicator_LED_pin, OUTPUT);//6.  assign LED pin as output
+  pinMode(BUTTON_pin_input, INPUT); //7. assign push button as input
+}  //8
+void loop()  //9
+{
+  BUTTON_pin_input_STATE = digitalRead(BUTTON_pin_input);  // 10
+  if (BUTTON_pin_input_STATE == HIGH) //11. check state
+  {   //12
+    digitalWrite(indicator_LED_pin, HIGH);//13. make LED pin HIGH
+    delay(20); //14. wait for 20mSec
+  }  //15
+  else   //16
+  {  //17
+    digitalWrite(indicator_LED_pin, LOW); //18. make LED pin LOW
+    delay(20); //19. wait for 20mSec
+  }  //20
+}  //21

@@ -1,0 +1,58 @@
+void setup()  //1
+{   //2
+  Serial.begin(9600)   //3
+  Serial.println("MMA8452Q Test Code!");   //4
+  accel.init();     //5
+}    //6
+void loop()      //7
+{  	    //8
+  if (accel.available())       //9
+  {      //10
+    printCalculatedAccels();     //11
+    //printAccels(); //12. Uncomment to print digital readings
+
+    printOrientation();    //13
+    Serial.println(); //14. Print new line every time.
+  }    //15
+}   //16
+void printAccels()   //17
+{    //18
+  Serial.print(accel.x, 3);   //19
+  Serial.print("\t");        //20
+  Serial.print(accel.y, 3);         //21
+  Serial.print("\t");          //22
+  Serial.print(accel.z, 3);         //23
+  Serial.print("\t");          //24
+}           //25
+void printCalculatedAccels()          //26
+{           //27
+  Serial.print(accel.cx, 3);          //28
+  Serial.print("\t");         //29
+  Serial.print(accel.cy, 3);         //30
+  Serial.print("\t");           //31
+  Serial.print(accel.cz, 3);           //32
+  Serial.print("\t");         //33
+}      //34
+void printOrientation()         //35
+{            //36
+  byte pl = accel.readPL();          //37
+  switch (pl)         //38
+  {              //39
+    case PORTRAIT_U:             //40
+      Serial.print("Portrait Up");        //41
+      break;         //42
+    case PORTRAIT_D:          //43
+      Serial.print("Portrait Down");      //44
+      break;       //45
+    case LANDSCAPE_R:           //46
+      Serial.print("Landscape Right");         //47
+      break;        //48
+    case LANDSCAPE_L:          //49
+      Serial.print("Landscape Left");       //50
+      break;       //51
+    case LOCKOUT:        //52
+      Serial.print("Flat");         //53
+      break;            //54
+  }           //55
+}          //56
+
